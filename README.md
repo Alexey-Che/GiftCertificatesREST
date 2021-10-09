@@ -52,10 +52,3 @@ c.	If Proxy pattern is used, it should be implemented without code duplication (
 12.	Repository layer should be tested using integration tests with an in-memory embedded database. All operations with certificates should be covered with integration tests.
 13.	APIs should be demonstrated using Postman tool. Postman collections with APIs should be prepared for the demo.
 
-Restrictions
-It is forbidden to use:
-1.	Spring Boot,
-2.	Spring Data Repositories,
-3.	JPA,
-4.	Lombok,
-5.	Powermock.
