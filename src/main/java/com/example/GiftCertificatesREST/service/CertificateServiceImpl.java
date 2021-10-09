@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,8 +25,6 @@ public class CertificateServiceImpl implements CertificateService {
     public GiftCertificate createGiftCertificate(GiftCertificate giftCertificate) {
         giftCertificate.setCreateDate(LocalDate.now());
         giftCertificate.setLastUpdateDate(LocalDate.now());
-        List<Tag> tags = tagService.getAllTags();
-//        List<Tag> result = new ArrayList<>();
         for (Tag tag : giftCertificate.getTags()){
                    tag.setName(tagService.getTagById(tag.getId()).getName());
         }
