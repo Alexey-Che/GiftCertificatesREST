@@ -49,9 +49,16 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
     @Override
     @Transactional
     public List<GiftCertificate> getGiftCertificatesByTagId(Long id) {
-//        return entityManager.createQuery("select s from GiftCertificate s where Tag.id = :id",
-//                GiftCertificate.class).setParameter("id", id).getResultList();
-        return null;
+        return entityManager
+                .createNativeQuery("SELECT certificates.gift.id, certificates.gift.name, " +
+                                "certificates.gift.description, certificates.gift.price, " +
+                                "certificates.gift.create_date, certificates.gift.last_update_date, " +
+                                "certificates.gift.duration " +
+                                "FROM certificates.gift " +
+                                "JOIN certificates.tag_gift ON gift.id = tag_gift.gift_id " +
+                                "JOIN certificates.tag ON tag_gift.tag_id = tag.id " +
+                                "WHERE tag.id = :id",
+                        GiftCertificate.class).setParameter("id", id) .getResultList();
     }
 
     @Override

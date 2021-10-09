@@ -2,26 +2,35 @@ package com.example.GiftCertificatesREST.service;
 
 import com.example.GiftCertificatesREST.dao.GiftCertificateDao;
 import com.example.GiftCertificatesREST.models.GiftCertificate;
+import com.example.GiftCertificatesREST.models.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CertificateServiceImpl implements CertificateService {
 
     private final GiftCertificateDao giftCertificateDao;
+    private final TagService tagService;
 
     @Autowired
-    public CertificateServiceImpl(GiftCertificateDao giftCertificateDao) {
+    public CertificateServiceImpl(GiftCertificateDao giftCertificateDao, TagService tagService) {
         this.giftCertificateDao = giftCertificateDao;
+        this.tagService = tagService;
     }
 
     @Override
     public GiftCertificate createGiftCertificate(GiftCertificate giftCertificate) {
         giftCertificate.setCreateDate(LocalDate.now());
         giftCertificate.setLastUpdateDate(LocalDate.now());
+        List<Tag> tags = tagService.getAllTags();
+//        List<Tag> result = new ArrayList<>();
+        for (Tag tag : giftCertificate.getTags()){
+                   tag.setName(tagService.getTagById(tag.getId()).getName());
+        }
         return giftCertificateDao.createCertificate(giftCertificate);
     }
 

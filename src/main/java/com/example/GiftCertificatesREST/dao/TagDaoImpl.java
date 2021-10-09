@@ -26,10 +26,10 @@ public class TagDaoImpl implements TagDao{
     @Override
     @Transactional
     public Tag createTag(Tag tag) {
-        tag.setId(null);
-        entityManager.persist(tag);
-        return tag;
-//        return tagRepository.save(tag);
+//        tag.setId(null);
+//        entityManager.persist(tag);
+//        return tag;
+        return tagRepository.save(tag);
     }
 
     @Override
