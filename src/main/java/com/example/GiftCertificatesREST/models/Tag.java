@@ -38,11 +38,11 @@ public class Tag {
         if (this == o) return true;
         if (!(o instanceof Tag)) return false;
         Tag tag = (Tag) o;
-        return Objects.equals(getId(), tag.getId()) && Objects.equals(getName(), tag.getName());
+        return Objects.equals(getName(), tag.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName());
+        return Objects.hash(getName());
     }
 }

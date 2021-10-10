@@ -25,9 +25,6 @@ public class CertificateServiceImpl implements CertificateService {
     public GiftCertificate createGiftCertificate(GiftCertificate giftCertificate) {
         giftCertificate.setCreateDate(LocalDate.now());
         giftCertificate.setLastUpdateDate(LocalDate.now());
-        for (Tag tag : giftCertificate.getTags()){
-                   tag.setName(tagService.getTagById(tag.getId()).getName());
-        }
         return giftCertificateDao.createCertificate(giftCertificate);
     }
 
