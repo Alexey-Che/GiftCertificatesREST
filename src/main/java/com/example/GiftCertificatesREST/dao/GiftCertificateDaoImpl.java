@@ -50,10 +50,7 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
     @Transactional
     public List<GiftCertificate> getGiftCertificatesByTagId(Long id) {
         return entityManager
-                .createNativeQuery("SELECT certificates.gift.id, certificates.gift.name, " +
-                                "certificates.gift.description, certificates.gift.price, " +
-                                "certificates.gift.create_date, certificates.gift.last_update_date, " +
-                                "certificates.gift.duration " +
+                .createNativeQuery("SELECT *" +
                                 "FROM certificates.gift " +
                                 "JOIN certificates.tag_gift ON gift.id = tag_gift.gift_id " +
                                 "JOIN certificates.tag ON tag_gift.tag_id = tag.id " +
