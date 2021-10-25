@@ -37,13 +37,6 @@ public class GiftCertificate {
     public GiftCertificate() {
     }
 
-    public GiftCertificate(String name, String description, int price, int duration) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.duration = duration;
-    }
-
     public Long getId() {
         return id;
     }

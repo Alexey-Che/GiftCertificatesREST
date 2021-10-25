@@ -13,4 +13,5 @@ public interface CertificateService {
     GiftCertificate getGiftCertificateById(Long id);
     void updateGiftCertificate(Long id, GiftCertificate giftCertificate);
     List<GiftCertificate> getGiftCertificatesByTagId(Long id);
+    List<GiftCertificate> getSortedGiftCertificatesBy(List<GiftCertificate> list, String sort);
 }

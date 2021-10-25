@@ -2,23 +2,22 @@ package com.example.GiftCertificatesREST.service;
 
 import com.example.GiftCertificatesREST.dao.GiftCertificateDao;
 import com.example.GiftCertificatesREST.models.GiftCertificate;
-import com.example.GiftCertificatesREST.models.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CertificateServiceImpl implements CertificateService {
 
     private final GiftCertificateDao giftCertificateDao;
-    private final TagService tagService;
 
     @Autowired
-    public CertificateServiceImpl(GiftCertificateDao giftCertificateDao, TagService tagService) {
+    public CertificateServiceImpl(GiftCertificateDao giftCertificateDao) {
         this.giftCertificateDao = giftCertificateDao;
-        this.tagService = tagService;
     }
 
     @Override
@@ -56,5 +55,18 @@ public class CertificateServiceImpl implements CertificateService {
     @Override
     public List<GiftCertificate> getGiftCertificatesByTagId(Long id) {
         return giftCertificateDao.getGiftCertificatesByTagId(id);
+    }
+
+    @Override
+    public List<GiftCertificate> getSortedGiftCertificatesBy(List<GiftCertificate> list, String sort) {
+        switch (sort) {
+            case  "name": list
+                    .stream()
+                    .sorted(Comparator.comparing(GiftCertificate::getName));
+            case "date": list
+                    .stream()
+                    .sorted(Comparator.comparing(GiftCertificate::getCreateDate));
+        }
+        return list;
     }
 }
