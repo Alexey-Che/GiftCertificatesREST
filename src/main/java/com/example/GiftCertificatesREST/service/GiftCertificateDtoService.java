@@ -16,12 +16,12 @@ public class GiftCertificateDtoService {
         this.modelMapper = modelMapper;
     }
 
-    public GiftCertificateDto convertGiftCertificateToDto(GiftCertificate giftCertificate) {
+    public GiftCertificateDto toDto(GiftCertificate giftCertificate) {
         return modelMapper.map(giftCertificate,
                 GiftCertificateDto.class);
     }
 
-    public GiftCertificate convertGiftCertificateDtoToEntity(GiftCertificateDto giftCertificateDto) {
+    public GiftCertificate toEntity(GiftCertificateDto giftCertificateDto) {
         return modelMapper.map(giftCertificateDto, GiftCertificate.class);
     }
 }

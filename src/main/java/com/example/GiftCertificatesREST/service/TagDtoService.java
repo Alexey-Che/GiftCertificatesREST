@@ -16,11 +16,11 @@ public class TagDtoService {
         this.modelMapper = modelMapper;
     }
 
-    public TagDto convertTagToDto(Tag tag) {
+    public TagDto toDto(Tag tag) {
         return modelMapper.map(tag, TagDto.class);
     }
 
-    public Tag convertTagDtoToEntity(TagDto tagDto) {
+    public Tag toEntity(TagDto tagDto) {
         return modelMapper.map(tagDto, Tag.class);
     }
 }

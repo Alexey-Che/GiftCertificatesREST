@@ -30,7 +30,7 @@ public class TagController {
         List<Tag> tags = tagService.getAllTags();
         return tags
                 .stream()
-                .map(tagDtoService::convertTagToDto)
+                .map(tagDtoService::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -43,15 +43,15 @@ public class TagController {
     @GetMapping("/{id}")
     @ResponseBody
     public TagDto getTagById(@PathVariable("id") Long id) {
-        return tagDtoService.convertTagToDto(tagService.getTagById(id));
+        return tagDtoService.toDto(tagService.getTagById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public TagDto createTag(@RequestBody TagDto tagDto){
-        Tag tag = tagDtoService.convertTagDtoToEntity(tagDto);
+        Tag tag = tagDtoService.toEntity(tagDto);
         Tag created = tagService.createTag(tag);
-        return tagDtoService.convertTagToDto(created);
+        return tagDtoService.toDto(created);
     }
 }

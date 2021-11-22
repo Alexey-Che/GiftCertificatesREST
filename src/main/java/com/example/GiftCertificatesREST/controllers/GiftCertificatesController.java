@@ -29,7 +29,7 @@ public class GiftCertificatesController {
         List<GiftCertificate> giftCertificates = certificateService.getAllCertificates();
         return giftCertificates
                 .stream()
-                .map(giftCertificateDtoService::convertGiftCertificateToDto)
+                .map(giftCertificateDtoService::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -38,7 +38,7 @@ public class GiftCertificatesController {
     public void updateGiftCertificate(@PathVariable("id") Long id,
                                       @RequestBody GiftCertificateDto giftCertificateDto) {
         GiftCertificate giftCertificate = giftCertificateDtoService
-                .convertGiftCertificateDtoToEntity(giftCertificateDto);
+                .toEntity(giftCertificateDto);
         certificateService.updateGiftCertificate(id, giftCertificate);
     }
 
@@ -52,7 +52,7 @@ public class GiftCertificatesController {
     @ResponseBody
     public GiftCertificateDto getGiftCertificateById(@PathVariable("id") Long id) {
         return giftCertificateDtoService
-                .convertGiftCertificateToDto(certificateService.getGiftCertificateById(id));
+                .toDto(certificateService.getGiftCertificateById(id));
     }
 
     @PostMapping
@@ -60,9 +60,9 @@ public class GiftCertificatesController {
     @ResponseBody
     public GiftCertificateDto createGiftCertificate(@RequestBody GiftCertificateDto giftCertificateDto) {
         GiftCertificate giftCertificate = giftCertificateDtoService
-                .convertGiftCertificateDtoToEntity(giftCertificateDto);
+                .toEntity(giftCertificateDto);
         GiftCertificate giftCertificateCreated = certificateService.createGiftCertificate(giftCertificate);
-        return giftCertificateDtoService.convertGiftCertificateToDto(giftCertificateCreated);
+        return giftCertificateDtoService.toDto(giftCertificateCreated);
     }
 
     @GetMapping(value = "/search")
@@ -73,7 +73,7 @@ public class GiftCertificatesController {
         return certificateService
                 .getSortedGiftCertificatesBy(result, sort)
                 .stream()
-                .map(giftCertificateDtoService::convertGiftCertificateToDto)
+                .map(giftCertificateDtoService::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -85,7 +85,7 @@ public class GiftCertificatesController {
         return certificateService
                 .getSortedGiftCertificatesBy(result, sort)
                 .stream()
-                .map(giftCertificateDtoService::convertGiftCertificateToDto)
+                .map(giftCertificateDtoService::toDto)
                 .collect(Collectors.toList());
     }
 }
